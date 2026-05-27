@@ -76,25 +76,53 @@ docker-compose up --build
 
 ```
 
-Both services will run health checks. Once healthy, the API will be available at `http://localhost:8000`.
+Both services will run health checks. Once healthy, your API will be live and accessible at: **`http://localhost:8000`**
 
-## API Endpoints
+## API Endpoints & Usage Examples
+
+You can test the API locally using `curl`, Postman, or Python's `requests` library. All HTTP endpoints are hosted at `http://localhost:8000`.
 
 ### `GET /health`
 
 Verifies that the FastAPI service is running and ready to accept traffic.
 
+* **Test it:**
+```bash
+curl http://localhost:8000/health
+
+```
+
+
+
 ### `POST /detect/image`
 
 Accepts a multipart image upload, formats it, sends it to Triton for gRPC inference, applies Non-Maximum Suppression (NMS), and returns a JSON array of bounding boxes and class labels.
+
+* **Test it:**
+```bash
+curl -X POST -F "file=@sample_image.jpg" http://localhost:8000/detect/image
+
+```
+
+
 
 ### `POST /track/video`
 
 Accepts a video upload and processes the frames asynchronously using FastAPI's `BackgroundTasks`. The annotated video is saved directly to the `/output` directory.
 
+* **Test it:**
+```bash
+curl -X POST -F "file=@sample_video.mp4" http://localhost:8000/track/video
+
+```
+
+
+
 ### `WS /track/ws`
 
 A WebSocket endpoint built for real-time video streaming. It accepts binary frame data, updates the DeepSORT tracker, and streams the tracked coordinates and IDs back to the client.
+
+* **Endpoint URL:** `ws://localhost:8000/track/ws`
 
 ## Evaluation
 
