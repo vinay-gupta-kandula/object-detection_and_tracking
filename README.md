@@ -84,7 +84,7 @@ Both services will run health checks. Once healthy, your API will be live and ac
 
 FastAPI automatically generates a fully interactive UI to test the endpoints. Once your Docker containers are running, you can click the link below to upload images, send videos, and test the API directly from your browser:
 
-👉 **[Interactive Swagger UI Documentation](https://www.google.com/search?q=http://localhost:8000/docs)**
+👉 **[Interactive Swagger UI Documentation](http://localhost:8000/docs)**
 
 Alternatively, you can test the API locally using `curl`, Postman, or Python's `requests` library:
 
