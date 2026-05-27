@@ -78,9 +78,15 @@ docker-compose up --build
 
 Both services will run health checks. Once healthy, your API will be live and accessible at: **`http://localhost:8000`**
 
-## API Endpoints & Usage Examples
+---
 
-You can test the API locally using `curl`, Postman, or Python's `requests` library. All HTTP endpoints are hosted at `http://localhost:8000`.
+## API Endpoints & Interactive Docs
+
+FastAPI automatically generates a fully interactive UI to test the endpoints. Once your Docker containers are running, you can click the link below to upload images, send videos, and test the API directly from your browser:
+
+👉 **[Interactive Swagger UI Documentation](https://www.google.com/search?q=http://localhost:8000/docs)**
+
+Alternatively, you can test the API locally using `curl`, Postman, or Python's `requests` library:
 
 ### `GET /health`
 
@@ -124,6 +130,8 @@ A WebSocket endpoint built for real-time video streaming. It accepts binary fram
 
 * **Endpoint URL:** `ws://localhost:8000/track/ws`
 
+---
+
 ## Evaluation
 
 To generate performance and accuracy metrics (mAP, precision, recall, MOTA, FPS, and latency), run the evaluation script while the Docker containers are active:
@@ -138,3 +146,7 @@ This will populate the `output/` folder with `detection_metrics.json`, `tracking
 ## Configuration Details: Triton Inference Server
 
 The `config.pbtxt` is configured to handle dynamic batching (up to 16). Note that the ONNX model's output axis is set to dynamic (`[14, -1]`) to prevent shape mismatch errors when Triton automatically prepends the batch dimension.
+
+```
+
+```
