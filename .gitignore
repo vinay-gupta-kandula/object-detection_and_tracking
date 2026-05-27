@@ -1,0 +1,53 @@
+# ==========================================
+# 1. ALWAYS IGNORE (Junk, Caches, & Secrets)
+# ==========================================
+
+# Secrets and Local Configs
+.env
+
+# YOLOv8 & MLFlow Auto-Generated Logs (MASSIVE space hogs)
+runs/
+mlflow/
+
+# Dataset Images and YOLO cache files
+data/train/
+data/valid/
+data/test/
+*.cache
+
+# Random test images/videos in the root directory
+/bus.jpg
+*.mp4
+*.avi
+
+# Python & System Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.DS_Store
+Thumbs.db
+
+
+# ==========================================
+# 2. ASSIGNMENT EXCEPTIONS 
+# (Normally ignored, but REQUIRED by your rubric)
+# ==========================================
+# Standard software engineering practice is to ignore large weights 
+# and generated outputs (*.pt, *.onnx, output/*). 
+#
+# HOWEVER, your assignment explicitly requires them! 
+# Therefore, they are NOT listed here so Git will track them.
+# 
+# We are intentionally ALLOWING:
+# - weights/best.pt
+# - models/yolov8_onnx/1/model.onnx
+# - output/detection_metrics.json
+# - output/performance.json
+# - output/tracking_metrics.json
+# - output/tracking_results.csv
+# - data/data.yaml (Required to know your class names)

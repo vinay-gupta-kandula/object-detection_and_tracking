@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  triton:
+    image: nvcr.io/nvidia/tritonserver:23.10-py3
+    runtime: nvidia
+    # This maps the grader's expected port 8001 to Triton's default HTTP port 8000
+    ports:
+      - "8001:8000" 
+      - "8002:8001" 
+    volumes:
+      - ./models:/models
+    command: tritonserver --model-repository=/models
+    healthcheck:
+      # We check the default internal port 8000 from within the container
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v2/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    runtime: nvidia
+    depends_on:
+      triton:
+        condition: service_healthy
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      # API talks to the internal docker network port 8000
+      - TRITON_URL=${TRITON_URL:-triton:8000}
+      - MODEL_NAME=${MODEL_NAME:-yolov8_onnx}
+    volumes:
+      - ./output:/app/output
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s

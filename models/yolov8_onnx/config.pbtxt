@@ -1,0 +1,6 @@
+name: "yolov8_onnx"
+platform: "onnxruntime_onnx"
+max_batch_size: 16
+# We remove 'input' and 'output' blocks entirely.
+# This forces Triton to read the model.onnx file directly 
+# and auto-configure itself at startup.
