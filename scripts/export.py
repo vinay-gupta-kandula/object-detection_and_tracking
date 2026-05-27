@@ -5,7 +5,7 @@ from ultralytics import YOLO
 def main():
     print("Starting ONNX export pipeline...")
     
-    source_weights = "yolov8n.pt"
+    source_weights = "weights/best.pt"
     # Ensure we use the exact path the grader looks for
     target_dir = "models/yolov8_onnx/1"
     target_onnx = os.path.join(target_dir, "model.onnx")
